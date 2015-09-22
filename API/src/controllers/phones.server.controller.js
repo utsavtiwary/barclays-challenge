@@ -124,3 +124,28 @@ function updateBeaconData(phoneId, sensorDistances, next) {
     });
     return Q.all(promises);
 }
+
+exports.getCurrentLocation = function(req, res, next) {
+    var phoneId = req.params.phoneId;
+    Phone.findOne({_id: phoneId})
+        .populate('currentRoomId')
+        .select('currentRoomId -_id')
+        .exec(function(err, phoneLocation) {
+            if (err) return next(err);
+            res.json(phoneLocation.currentRoomId);
+        })
+};
+
+function getDistance(loc1, loc2) {
+    var dist = 0;
+    if(loc1.city != loc2.city){
+        dist += 12*60;
+    }
+    if(loc2.buildingId != loc1.buildingId){
+        dist += 30;
+    }
+    if(loc1.floor != loc2.floor){
+        dist += 10;
+    }
+    return dist;
+}
