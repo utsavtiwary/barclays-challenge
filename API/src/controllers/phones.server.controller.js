@@ -60,21 +60,20 @@ exports.deletePhone = function(req, res, next){
 };
 
 exports.updatePhoneBeaconData = function(req, res, next) {
-    console.log("Enters Update Phone Beacon Data");
     var phoneId = req.params.phoneId;
     var sensorDistances = req.body;
 
     updateBeaconData(phoneId, sensorDistances)
         .then(function() {
-            Phone.findOne({_id: phoneId}, function(err, phone) {
-                if(err) return next(err);
-                findClosestBeacon(phone, sensorDistances).then(function(){
-                    phone.save(function(err) {
-                        if (err) return next(err);
+            Phone.findOne({_id: phoneId})
+                .populate('beaconData')
+                .exec(function (err, phone) {
+                    console.log(phone);
+                    if (err) return next(err);
+                    findClosestBeacon(phone, phone.beaconData).then(function () {
                         res.status(200).end();
-                    });
+                    })
                 })
-            })
         })
         .catch(function(err) {
             return next(err);
@@ -87,13 +86,14 @@ function findClosestBeacon(phone, sensorDistances) {
     var i = 0;
     for (i; i < sensorDistances.length; i++) {
         if (sensorDistances[i].distance > closestDistance) {
-            console.log("Old Closest", closestDistance);
-            console.log("New Closest", sensorDistance[i].distance);
-            closestDistance = sensorDistance[i].distance;
-            phone.currentRoomId = sensorDistance[i].sensorId;
+            var promise = Q.defer();
+            promises.push(promise);
+            closestDistance = sensorDistances[i].distance;
+            phone.currentRoomId = sensorDistances[i].beaconId;
             promise.resolve();
         }
     }
+    phone.save();
     return Q.all(promises);
 }
 
