@@ -16,6 +16,7 @@ var phoneSchema = new Schema({
     },
     currentRoomId: {
         type: String,
+        ref: 'Beacon',
         default: 0
     }
 });

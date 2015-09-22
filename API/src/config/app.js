@@ -22,6 +22,7 @@ module.exports = function() {
     require('../routes/index.server.routes')(app);
     require('../routes/phone.server.routes')(app);
     require('../routes/beacon.server.routes')(app);
+    require('../routes/roomBooking.server.routes')(app);
 
     return app;
 };

@@ -12,5 +12,5 @@ module.exports = function(app) {
 
     app.put('/phones/:phoneId/beaconData', phones.updatePhoneBeaconData);
 
-    app.get('/phones/:phoneId/currentRoom')
+    app.get('/phones/:phoneId/currentRoom', phones.getCurrentLocation);
 };
