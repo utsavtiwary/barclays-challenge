@@ -18,6 +18,10 @@
       "type": "any",
       "required": true
     },
+    "managerId": {
+      "type": "any",
+      "required": true
+    },
     "whiteboards": {
       "type": "number"
     },
@@ -29,7 +33,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "manager": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": []
 }
