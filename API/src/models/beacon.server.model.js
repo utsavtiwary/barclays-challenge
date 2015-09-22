@@ -16,7 +16,7 @@ var beaconSchema = new Schema({
     },
     city: {
         type: String,
-        default: "Vice City"
+        default: "Unknown"
     },
     buildingId: {
         type: Number,
@@ -26,9 +26,9 @@ var beaconSchema = new Schema({
         type: Number,
         default: -25
     },
-    bookings: {
-        type: [{startDate: {type: Date}, endDate: {type: Date}}],
-        default: []
+    booked: {
+        type: Boolean,
+        default: false
     },
     capacity: {
         type: Number,
