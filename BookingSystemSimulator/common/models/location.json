@@ -19,14 +19,21 @@
     },
     "coordinates": {
       "type": "geopoint"
-    },
-    "manager": {
-      "type": "any",
-      "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "locations": {
+      "type": "hasMany",
+      "model": "location",
+      "foreignKey": ""
+    },
+    "rooms": {
+      "type": "hasMany",
+      "model": "room",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": []
 }
