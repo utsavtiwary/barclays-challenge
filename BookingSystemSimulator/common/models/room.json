@@ -1,0 +1,55 @@
+{
+  "name": "room",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "capacity": {
+      "type": "number",
+      "required": true
+    },
+    "locationId": {
+      "type": "any",
+      "required": true
+    },
+    "managerId": {
+      "type": "any",
+      "required": true
+    },
+    "whiteboards": {
+      "type": "number"
+    },
+    "screens": {
+      "type": "number"
+    },
+    "phones": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "manager": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": ""
+    },
+    "location": {
+      "type": "belongsTo",
+      "model": "location",
+      "foreignKey": ""
+    },
+    "bookings": {
+      "type": "hasAndBelongsToMany",
+      "model": "booking",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

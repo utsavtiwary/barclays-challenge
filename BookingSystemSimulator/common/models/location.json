@@ -1,0 +1,35 @@
+{
+  "name": "location",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "buildingId": {
+      "type": "number",
+      "required": true
+    },
+    "floor": {
+      "type": "number",
+      "required": true
+    },
+    "coordinates": {
+      "type": "geopoint"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "rooms": {
+      "type": "hasMany",
+      "model": "room",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

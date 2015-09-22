@@ -1,0 +1,47 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "roomBookings"
+  },
+  "AccessToken": {
+    "dataSource": "roomBookings",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "roomBookings",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "roomBookings",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "roomBookings",
+    "public": false
+  },
+  "room": {
+    "dataSource": "roomBookings",
+    "public": true
+  },
+  "location": {
+    "dataSource": "roomBookings",
+    "public": true
+  },
+  "booking": {
+    "dataSource": "roomBookings",
+    "public": true
+  }
+}
