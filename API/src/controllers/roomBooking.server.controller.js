@@ -4,34 +4,39 @@
 var Phone = require('../models/phone.server.model');
 var request = require('request');
 var Beacon = require('../models/beacon.server.model');
+var Q = require('q');
 
-exports.bookRoomNow = function(req, res, next) {
+exports.getFreeRooms = function(req, res, next) {
     var capacity = req.body.capacity;
     var duration = req.body.duration;
     var location = req.body.location;
 
-    var freeRoomList = getRoomsFromExternal(capacity, duration, location);
-    var roomList;
+    getRoomsFromExternal(capacity, duration, location)
+        .then(function(rooms) {
+            res.json(rooms);
+        })
+        .catch(function(err) {
+            return next(err);
+        })
 
-    roomList = requestMockAPI(location, capacity, duration);
-
-    orderRooms(roomList);
-
-    replyPhone(roomList);
 };
 
 function getRoomsFromExternal(capacity, duration, location) {
-    Beacon.findOne(location, function(err, rooms) {
+    var deferred = Q.defer();
+    Beacon.find(location, function(err, rooms) {
+        if(err) deferred.reject(err);
         if (rooms.length > 2) {
-            return(rooms.slice(0, 2));
+            deferred.resolve(rooms.slice(0, 2));
         } else {
-            Beacon.findOne({city: location.city, buildingId: location.buildingId}, function(err, rooms) {
-                if (rooms.length > 2) {
-                    return(rooms.slice(0, 2));
+            Beacon.find({city: location.city, buildingId: location.buildingId}, function(err, newRooms) {
+                if (err) deferred.reject(err);
+                if (newRooms.length > 2) {
+                    deferred.resolve(newRooms.slice(0, 2));
                 } else {
-                    return rooms;
+                    deferred.resolve(newRooms);
                 }
             });
         }
     });
+    return deferred.promise;
 }

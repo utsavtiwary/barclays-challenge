@@ -4,5 +4,5 @@
 var roomBookings = require('../controllers/roomBooking.server.controller');
 
 module.exports = function(app) {
-    app.post('/phones/:phoneId/roomNow/', roomBookings.getFreeRooms);
+    app.post('/roomNow/', roomBookings.getFreeRooms);
 };
