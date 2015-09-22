@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     grunt.registerTask ('configure', ['copy:datasourcesConfig']);
     grunt.registerTask ('configure-test', ['copy:datasourcesTestConfig']);
     grunt.registerTask ('default', ['configure', 'jsdoc', 'nodemon']);
-    grunt.registerTask ('build', ['configure', 'jsdoc', 'compress']);
+    grunt.registerTask ('build', ['configure', 'loopback_sdk_angular', 'jsdoc', 'compress']);
     grunt.registerTask ('test', ['configure-test', 'jsdoc', 'mochaTest', 'jsdoc']);
     grunt.registerTask ('deploy-dev', ['configure', 'jsdoc', 'rsync:dev']);
     //grunt.registerTask('deploy-stage', ['exec:zred', 'exec:chmod', 'rsync:stage', 'exec:restart', 'exec:znet']);
@@ -130,6 +130,13 @@ module.exports = function(grunt) {
                     host: '' + global.user + '@' + global.instance
                 }
             }
+        },
+
+        loopback_sdk_angular: {
+            options: {
+                input: "server/server.js",
+                output: "client/js/lb-services.js"
+            }
         }
     });
 
@@ -140,5 +147,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-rsync');
     grunt.loadNpmTasks('grunt-jsdoc');
-
+    grunt.loadNpmTasks('grunt-loopback-sdk-angular');
 };

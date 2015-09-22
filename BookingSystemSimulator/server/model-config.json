@@ -43,5 +43,9 @@
   "booking": {
     "dataSource": "roomBookings",
     "public": true
+  },
+  "roomReservation": {
+    "dataSource": "roomBookings",
+    "public": true
   }
 }
