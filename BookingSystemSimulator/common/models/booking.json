@@ -1,25 +1,27 @@
 {
-  "name": "room",
+  "name": "booking",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "capacity": {
-      "type": "number",
-      "required": true
-    },
-    "locationId": {
+    "userId": {
       "type": "any",
       "required": true
     },
-    "managerId": {
-      "type": "any",
+    "title": {
+      "type": "string"
+    },
+    "participantCount": {
+      "type": "number"
+    },
+    "startTime": {
+      "type": "date",
+      "required": true
+    },
+    "endTime": {
+      "type": "date",
       "required": true
     },
     "whiteboards": {
@@ -34,19 +36,14 @@
   },
   "validations": [],
   "relations": {
-    "manager": {
+    "user": {
       "type": "belongsTo",
       "model": "User",
       "foreignKey": ""
     },
-    "location": {
-      "type": "belongsTo",
-      "model": "location",
-      "foreignKey": ""
-    },
-    "bookings": {
+    "rooms": {
       "type": "hasAndBelongsToMany",
-      "model": "booking",
+      "model": "room",
       "foreignKey": ""
     }
   },

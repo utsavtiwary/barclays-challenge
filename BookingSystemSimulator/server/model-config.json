@@ -39,5 +39,9 @@
   "location": {
     "dataSource": "roomBookings",
     "public": true
+  },
+  "booking": {
+    "dataSource": "roomBookings",
+    "public": true
   }
 }

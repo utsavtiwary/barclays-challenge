@@ -6,16 +6,17 @@
     "validateUpsert": true
   },
   "properties": {
-    "name": {
+    "city": {
       "type": "string",
       "required": true
     },
-    "type": {
-      "type": "string",
+    "buildingId": {
+      "type": "number",
       "required": true
     },
-    "address": {
-      "type": "string"
+    "floor": {
+      "type": "number",
+      "required": true
     },
     "coordinates": {
       "type": "geopoint"
@@ -23,11 +24,6 @@
   },
   "validations": [],
   "relations": {
-    "locations": {
-      "type": "hasMany",
-      "model": "location",
-      "foreignKey": ""
-    },
     "rooms": {
       "type": "hasMany",
       "model": "room",
