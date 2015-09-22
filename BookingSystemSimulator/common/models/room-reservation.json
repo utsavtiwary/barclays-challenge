@@ -1,0 +1,33 @@
+{
+  "name": "roomReservation",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+      "roomId": {
+          "type":"any",
+          "required": true
+      },
+      "bookingId": {
+          "type":"any",
+          "required": true
+      }
+  },
+  "validations": [],
+  "relations": {
+    "room": {
+      "type": "belongsTo",
+      "model": "room",
+      "foreignKey": ""
+    },
+    "booking": {
+      "type": "belongsTo",
+      "model": "booking",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}

@@ -42,9 +42,10 @@
       "foreignKey": ""
     },
     "rooms": {
-      "type": "hasAndBelongsToMany",
+      "type": "hasMany",
       "model": "room",
-      "foreignKey": ""
+      "foreignKey": "",
+      "through": "roomReservation"
     }
   },
   "acls": [],
